@@ -1,0 +1,25 @@
+version: "2"
+services:
+  git:
+    build: "./git"
+    container_name: "workshop-git"
+    ports:
+      - "9418:9418"
+    volumes:
+      - "vol-git:/opt/git"
+  jenkins:
+    build: "./jenkins"
+    container_name: "workshop-jenkins"
+    ports:
+      - "1080:8080"
+    volumes:
+      - "vol-jenkins:/var/jenkins_home"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  sonar:
+    image: "sonarqube:lts"
+    container_name: "workshop-sonar"
+    ports:
+      - "9000:9000"
+volumes:
+  vol-git:
+  vol-jenkins:
