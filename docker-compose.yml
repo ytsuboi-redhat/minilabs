@@ -23,7 +23,5 @@ services:
     container_name: "todo-frontend"
     ports:
      - "80:80"
-    volumes:
-     - ./todo-frontend/dist:/usr/share/nginx/html/
     depends_on: 
      - todo-backend

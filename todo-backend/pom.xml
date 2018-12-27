@@ -84,7 +84,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<!-- Workaround for the Spring Boot and Maven Surefire Plugin issue: The forked VM terminated without properly saying goodbye. VM crash or System.exit called? -->
+					<!-- Workaround for the Maven Surefire Plugin issue: The forked VM terminated without properly saying goodbye. VM crash or System.exit called? -->
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
