@@ -110,10 +110,9 @@ pipeline {
                             // Wait until mysql service is up
                             sh './todo-backend/wait-for-it.sh -t 30 todo-backend:8080'
 
-                            docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80 -v $PWD/todo-frontend/dist:/usr/share/nginx/html/') { frontend ->
+                            docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80') { frontend ->
                                 // Run AT
-                                echo 'TODO:AT'
-                                // sh 'mvn clean jacoco:prepare-agent test jacoco:report -f todo-backend'
+                                sh 'xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox'
                             }
                         }
                     }
