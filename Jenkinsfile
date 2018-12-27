@@ -112,7 +112,7 @@ pipeline {
 
                             docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80') { frontend ->
                                 // Run AT
-                                sh 'xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox'
+                                sh 'xvfb-run _JAVA_OPTIONS=-Dfile.encoding=UTF-8 mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox'
                             }
                         }
                     }
