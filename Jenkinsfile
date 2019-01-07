@@ -91,7 +91,6 @@ pipeline {
                         // Wait until mysql service is up
                         sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
                         // Run IT
-                        // sh 'mvn clean verify -P it -f todo-backend -Dspring.profiles.active=container,it -Dspring-boot.run.profiles=container,it'
                         sh 'mvn clean verify -P it -f todo-backend -Dspring.profiles.active=container'
                     }
                 }

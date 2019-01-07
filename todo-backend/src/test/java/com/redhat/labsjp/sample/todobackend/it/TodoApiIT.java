@@ -2,7 +2,6 @@ package com.redhat.labsjp.sample.todobackend.it;
 
 import static org.junit.Assert.assertThat;
 
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
@@ -10,7 +9,6 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.redhat.labsjp.sample.todobackend.CsvDataSetLoader;
 import com.redhat.labsjp.sample.todobackend.domain.Todo;
 
-import org.dbunit.util.fileloader.CsvDataFileLoader;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +19,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
