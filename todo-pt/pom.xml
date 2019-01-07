@@ -42,6 +42,7 @@
 	</properties>
 
 	<dependencyManagement>
+		<dependencies>
 			<dependency>
 				<groupId>com.fasterxml.jackson</groupId>
 				<artifactId>jackson-bom</artifactId>
