@@ -35,7 +35,7 @@
 		<version.org.hamcrest>1.3</version.org.hamcrest>	
 		<version.scala>2.12.3</version.scala>
 		<version.com.fasterxml.jackson.jackson-bom>2.8.5</version.com.fasterxml.jackson.jackson-bom>
-		<version.gatling>2.3.0</version.gatling>
+		<version.gatling>3.0.2</version.gatling>
 
 		<encoding>UTF-8</encoding>
 		<gatling.baseUrl>http://localhost:8080</gatling.baseUrl>
