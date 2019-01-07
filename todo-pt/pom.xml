@@ -131,6 +131,9 @@
         <artifactId>gatling-maven-plugin</artifactId>
 				<configuration>
 					<runMultipleSimulations>true</runMultipleSimulations>
+					<includes>
+  					<param>com.redhat.labsjp.sample.pt.Todo</param>
+					</includes>
 					<jvmArgs>
 						<jvmArg>-Dgatling.baseUrl=${gatling.baseUrl}</jvmArg>
 					</jvmArgs>
