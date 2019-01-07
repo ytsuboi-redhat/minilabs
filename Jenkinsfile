@@ -117,7 +117,7 @@ pipeline {
         //     }
         // }
         stage('パフォーマンステスト') {
-            step {
+            steps {
                 script {
                     docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
                         // Wait until mysql service is up
