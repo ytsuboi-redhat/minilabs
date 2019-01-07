@@ -127,7 +127,8 @@ pipeline {
                             // Wait until mysql service is up
                             sh './todo-backend/wait-for-it.sh -t 30 todo-backend:8080'
                             // Run PT
-                            sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 mvn clean gatling:test -f todo-pt -Dgatling.baseUrl=http://todo-backend:8080'
+                            // sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 mvn clean gatling:test -f todo-pt -Dgatling.baseUrl=http://todo-backend:8080'
+                            sh 'mvn clean gatling:test -f todo-pt -Dgatling.baseUrl=http://todo-backend:8080'
                         }
                     }
                 }
