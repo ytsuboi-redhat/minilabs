@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
  * $ mvn verify -P it
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestExecutionListeners({
     DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class,
