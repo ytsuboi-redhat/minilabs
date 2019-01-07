@@ -57,22 +57,22 @@ pipeline {
         //         sh "mvn sonar:sonar -f todo-backend -Dsonar.host.url=http://workshop-sonar:9000"
         //     }
         // }
-        // stage('frontendイメージビルド') {
-        //     steps {
-        //         dir('todo-frontend') {
-        //             nodejs(nodeJSInstallationName: 'Node 10.14.x') {
-        //                 sh 'npm run build'
-        //             }   
-        //         }
-        //         sh 'docker build todo-frontend -t todo-frontend'
-        //     }
-        // }
-        // stage('backendイメージビルド') {
-        //     steps {
-        //         sh 'mvn clean package -Dmaven.test.skip=true -f todo-backend'
-        //         sh 'docker build todo-backend -t todo-backend'
-        //     }
-        // }
+        stage('frontendイメージビルド') {
+            steps {
+                dir('todo-frontend') {
+                    nodejs(nodeJSInstallationName: 'Node 10.14.x') {
+                        sh 'npm run build'
+                    }   
+                }
+                sh 'docker build todo-frontend -t todo-frontend'
+            }
+        }
+        stage('backendイメージビルド') {
+            steps {
+                sh 'mvn clean package -Dmaven.test.skip=true -f todo-backend'
+                sh 'docker build todo-backend -t todo-backend'
+            }
+        }
         // stage('frontend結合テスト') {
         //     steps {
         //         script {
