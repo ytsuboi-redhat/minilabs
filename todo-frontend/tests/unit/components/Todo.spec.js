@@ -83,11 +83,11 @@ describe('Todo.vue', () => {
 
         wrapper.vm.$nextTick(() => {
           expect(wrapper.findAll('.table tbody tr')).to.have.lengthOf(2)
-          expect(wrapper.findAll('.table tbody .index').at(0).element.textContent).to.equal('0')
+          expect(wrapper.findAll('.table tbody .index').at(0).element.textContent).to.equal('1')
           expect(wrapper.findAll('.table tbody .title input').at(0).element.value).to.equal(todo1.title)
           expect(wrapper.findAll('.table tbody .status input').at(0).element.value).to.equal(todo1.status)
           expect(wrapper.findAll('.table tbody .desc input').at(0).element.value).to.equal(todo1.description)
-          expect(wrapper.findAll('.table tbody .index').at(1).element.textContent).to.equal('1')
+          expect(wrapper.findAll('.table tbody .index').at(1).element.textContent).to.equal('2')
           expect(wrapper.findAll('.table tbody .title input').at(1).element.value).to.equal(todo2.title)
           expect(wrapper.findAll('.table tbody .status input').at(1).element.value).to.equal(todo2.status)
           expect(wrapper.findAll('.table tbody .desc input').at(1).element.value).to.equal(todo2.description)
