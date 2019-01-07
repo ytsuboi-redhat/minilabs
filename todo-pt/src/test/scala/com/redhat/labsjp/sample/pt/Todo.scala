@@ -8,11 +8,6 @@ import scala.util.Random
 import scala.collection.mutable.ArrayBuffer
 import java.util.List
 import java.util.ArrayList
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
-import org.keycloak.admin.client.Keycloak
-import org.keycloak.admin.client.KeycloakBuilder
-import org.keycloak.representations.idm.UserRepresentation
-import org.keycloak.representations.idm.CredentialRepresentation
 
 class Todo extends Simulation {
 
