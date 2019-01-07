@@ -66,8 +66,7 @@ export default {
           this.todos = response.data
         })
         .catch(() => {
-          this.tabVisible = 'd-block'
-          // this.message = 'error'
+          this.message = 'error'
         })
     }
   }
