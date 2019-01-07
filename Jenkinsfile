@@ -57,22 +57,22 @@ pipeline {
         //         sh "mvn sonar:sonar -f todo-backend -Dsonar.host.url=http://workshop-sonar:9000"
         //     }
         // }
-        stage('frontendイメージビルド') {
-            steps {
-                dir('todo-frontend') {
-                    nodejs(nodeJSInstallationName: 'Node 10.14.x') {
-                        sh 'npm run build'
-                    }   
-                }
-                sh 'docker build todo-frontend -t todo-frontend'
-            }
-        }
-        stage('backendイメージビルド') {
-            steps {
-                sh 'mvn clean package -Dmaven.test.skip=true -f todo-backend'
-                sh 'docker build todo-backend -t todo-backend'
-            }
-        }
+        // stage('frontendイメージビルド') {
+        //     steps {
+        //         dir('todo-frontend') {
+        //             nodejs(nodeJSInstallationName: 'Node 10.14.x') {
+        //                 sh 'npm run build'
+        //             }   
+        //         }
+        //         sh 'docker build todo-frontend -t todo-frontend'
+        //     }
+        // }
+        // stage('backendイメージビルド') {
+        //     steps {
+        //         sh 'mvn clean package -Dmaven.test.skip=true -f todo-backend'
+        //         sh 'docker build todo-backend -t todo-backend'
+        //     }
+        // }
         // stage('frontend結合テスト') {
         //     steps {
         //         script {
@@ -84,38 +84,38 @@ pipeline {
         //         }
         //     }
         // }
-        stage('backend結合テスト') {
-            steps {
-                script {
-                    docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
-                        // Wait until mysql service is up
-                        sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
-                        // Run IT
-                        sh 'mvn clean verify -P it -f todo-backend -Dspring.profiles.active=container'
-                    }
-                }
-            }
-        }
-        stage('受け入れテスト') {
-            steps {
-                script {
-                    docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
-                        // Wait until mysql service is up
-                        sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
+        // stage('backend結合テスト') {
+        //     steps {
+        //         script {
+        //             docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
+        //                 // Wait until mysql service is up
+        //                 sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
+        //                 // Run IT
+        //                 sh 'mvn clean verify -P it -f todo-backend -Dspring.profiles.active=container'
+        //             }
+        //         }
+        //     }
+        // }
+        // stage('受け入れテスト') {
+        //     steps {
+        //         script {
+        //             docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
+        //                 // Wait until mysql service is up
+        //                 sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
 
-                        docker.image('todo-backend').withRun('--net=ci_default --name=todo-backend -p 8080:8080') { backend ->
-                            // Wait until mysql service is up
-                            sh './todo-backend/wait-for-it.sh -t 30 todo-backend:8080'
+        //                 docker.image('todo-backend').withRun('--net=ci_default --name=todo-backend -p 8080:8080') { backend ->
+        //                     // Wait until mysql service is up
+        //                     sh './todo-backend/wait-for-it.sh -t 30 todo-backend:8080'
 
-                            docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80') { frontend ->
-                                // Run AT
-                                sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox'
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //                     docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80') { frontend ->
+        //                         // Run AT
+        //                         sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox'
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         stage('パフォーマンステスト') {
             step {
                 script {
