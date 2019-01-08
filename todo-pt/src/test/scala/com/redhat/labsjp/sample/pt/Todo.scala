@@ -1,4 +1,4 @@
-package st
+package pt
 
 import collection.JavaConverters._
 import io.gatling.core.Predef._
