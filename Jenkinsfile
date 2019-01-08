@@ -109,7 +109,7 @@ pipeline {
 
                             docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80') { frontend ->
                                 // Run AT
-                                sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox -Dwdm.gitHubTokenName=ytsuboi-redhat -Dwdm.gitHubTokenSecret=50189ae4ed52e7f3912d3d0837e005e4d8fb3eb6'
+                                sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox -Dwdm.gitHubTokenName=ytsuboi-redhat -Dwdm.gitHubTokenSecret=9d3e1bbbb62942a37c665a96609f7ba1acced0ff'
                             }
                         }
                     }
