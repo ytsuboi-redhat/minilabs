@@ -73,18 +73,18 @@ pipeline {
                 sh 'docker build todo-backend -t todo-backend'
             }
         }
-        stage('frontend結合テスト') {
-            steps {
-                script {
-                    docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80 -v $PWD/todo-frontend/dist:/usr/share/nginx/html/') { frontend ->
-                        // Run AT
-                        echo 'TODO:Frontend-IT'
-                        // sh 'mvn clean jacoco:prepare-agent test jacoco:report -f todo-backend'
-                    }
-                }
-            }
-        }
-        stage('backend結合テスト') {
+        // stage('frontend結合テスト') {
+        //     steps {
+        //         script {
+        //             docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80 -v $PWD/todo-frontend/dist:/usr/share/nginx/html/') { frontend ->
+        //                 // Run AT
+        //                 echo 'TODO:Frontend-IT'
+        //                 // sh 'mvn clean jacoco:prepare-agent test jacoco:report -f todo-backend'
+        //             }
+        //         }
+        //     }
+        // }
+        stage('APIテスト') {
             steps {
                 script {
                     docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
@@ -109,7 +109,7 @@ pipeline {
 
                             docker.image('todo-frontend').withRun('--net=ci_default --name=todo-frontend -p 80:80') { frontend ->
                                 // Run AT
-                                sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox'
+                                sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 xvfb-run mvn clean test -f todo-at -Dselenide.baseUrl=http://todo-frontend -Dselenide.browser=firefox -Dwdm.gitHubTokenName=minilabs -Dwdm.gitHubTokenSecret=50189ae4ed52e7f3912d3d0837e005e4d8fb3eb6'
                             }
                         }
                     }
