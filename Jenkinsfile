@@ -4,7 +4,7 @@ pipeline {
     agent any
     tools {
         // maven 'maven3.6.0'
-        maven 'maven3.5.4'
+        maven 'maven3.5.3'
     }
     stages {
         // stage('チェックアウト') {
