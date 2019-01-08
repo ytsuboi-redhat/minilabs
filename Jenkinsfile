@@ -119,18 +119,18 @@ pipeline {
         stage('パフォーマンステスト') {
             steps {
                 script {
-                    docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
-                        // Wait until mysql service is up
-                        sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
+                    // docker.image('todo-mysql').withRun('--net=ci_default --name=todo-mysql -e "MYSQL_ROOT_PASSWORD=P@ssw0rd" -e "MYSQL_USER=todo" -e "MYSQL_PASSWORD=P@ssw0rd" -e "MYSQL_DATABASE=todo" -p 3306:3306') { db ->
+                    //     // Wait until mysql service is up
+                    //     sh './todo-backend/wait-for-it.sh -t 30 todo-mysql:3306'
 
-                        docker.image('todo-backend').withRun('--net=ci_default --name=todo-backend -p 8080:8080') { backend ->
-                            // Wait until mysql service is up
-                            sh './todo-backend/wait-for-it.sh -t 30 todo-backend:8080'
+                    //     docker.image('todo-backend').withRun('--net=ci_default --name=todo-backend -p 8080:8080') { backend ->
+                    //         // Wait until mysql service is up
+                    //         sh './todo-backend/wait-for-it.sh -t 30 todo-backend:8080'
                             // Run PT
                             // sh '_JAVA_OPTIONS=-Dfile.encoding=UTF-8 mvn clean gatling:test -f todo-pt -Dgatling.baseUrl=http://todo-backend:8080'
-                            sh 'mvn clean gatling:test -f todo-pt -Dgatling.baseUrl=http://todo-backend:8080'
-                        }
-                    }
+                            sh 'mvn clean gatling:test -f performance-test -Dgatling.baseUrl=http://todo-backend:8080'
+                    //     }
+                    // }
                 }
             }
         }
