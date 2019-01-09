@@ -10,11 +10,8 @@ services:
   jenkins:
     build: "./jenkins"
     container_name: "workshop-jenkins"
-    environment: 
-      JAVA_OPTS: "-Djava.awt.headless=true -Duser.timezone=Asia/Tokyo -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8"
     ports:
       - "1080:8080"
-      - "5900:5900"
     volumes:
       - "vol-jenkins:/var/jenkins_home"
       - "/var/run/docker.sock:/var/run/docker.sock"

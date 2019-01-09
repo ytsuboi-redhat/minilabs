@@ -105,17 +105,23 @@
   ```
   3. Jenkins (http://localhost:1080) にアクセスし、画面を通して初期設定を実施
      - 初期パスワードを入力
-     - Suggested Plugin を選択
-       - プラグインはインストール済みのためすぐに完了
+     - Suggested Plugin をインストール
      - 管理ユーザは適当に作成
      - Jenkins URL はそのまま
-  4. `Jenkinsの管理 -> システム設定 -> SonarQube servers` でSonarQubeを設定
+  4. 初期設定完了後、`Jenkinsの管理 -> プラグインの管理` で追加プラグインをインストール
+     - 「利用可能」タブを選択し、フィルタに以下のプラグイン名をそれぞれ入力し、絞り込み結果にチェックを入れる
+       - NodeJS
+       - SonarQube Scanner
+     - 「ダウンロードして再起動後にインストール」を選択
+     - "プラグインのインストール/アップグレード" 画面下部の「インストール完了後、ジョブがなければJenkinsを再起動する」にチェックを入れる
+     - ログ（標準出力）にて `workshop-jenkins | INFO: Finished Download metadata. x,xxx m` を確認後、Jenkinsのトップ画面にアクセスし、再ログインする
+  5. `Jenkinsの管理 -> システム設定 -> SonarQube servers` でSonarQubeを設定
      - SonarQube installations で「Add SonarQube」をクリックする
      - 表示されたフォームに以下の情報を入力
        - Name: default
        - Server URL: http://workshop-sonar:9000
      - 画面下部「保存」をクリックする
-  5. `Jenkinsの管理 -> Global Tool Configuration` で以下のツールを設定
+  1. `Jenkinsの管理 -> Global Tool Configuration` で以下のツールを設定
      - `SonarQube Scanner`
        - インストール済みSonarQube Scanner で「SonarQube Scanner追加」をクリックする
        - 表示されたフォームに以下の情報を入力
@@ -141,9 +147,12 @@
            - Global npm packages to install: @vue/cli
            - Global npm packages refresh hours: 72
      - 画面下部「Save」をクリックする
-  6. Jenkinsのトップ画面から新規ジョブ作成
+  2. Jenkinsのトップ画面から新規ジョブ作成
      - "Enter an item name" で "todo-app" と入力、パイプラインを選択して「OK」をクリックする
      - 遷移先にて以下の情報を選択/入力
+       - ビルドトリガ
+         - SCMをポーリング: Yes
+         - スケジュール: H/2 * * * *
        - パイプライン
          - 定義: Pipeline script from SCM
          - SCM: Git
@@ -154,6 +163,6 @@
              - ブランチ指定子: */master
          - Script Path: Jenkinsfile
      - 画面下部「保存」をクリックする
-  7. todo-appジョブ画面からビルド実行
+  3. ビルドが実行されるのを待つ
 
 以上

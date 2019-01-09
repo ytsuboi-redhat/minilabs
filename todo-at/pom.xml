@@ -28,7 +28,7 @@
 		<version.org.slf4j>1.7.25</version.org.slf4j>
 		<version.ch.qos.logback>1.2.3</version.ch.qos.logback>
 		<version.io.cucumber>3.0.2</version.io.cucumber>
-		<version.com.codeborne.selenide>5.0.1</version.com.codeborne.selenide>
+		<version.com.codeborne.selenide>4.14.1</version.com.codeborne.selenide>
 		<version.com.google.guava>26.0-jre</version.com.google.guava>
 		<version.org.hamcrest>1.3</version.org.hamcrest>
 	</properties>
@@ -121,8 +121,9 @@
 						<includes>
 							<include>**/*Test.java</include>
 						</includes>
-						<!-- Workaround for the Maven Surefire Plugin issue: The forked VM terminated without properly saying goodbye. VM crash or System.exit called? -->
-						<useSystemClassLoader>false</useSystemClassLoader>
+						<systemPropertyVariables>
+							<selenide.headless>true</selenide.headless>
+						</systemPropertyVariables>
 					</configuration>
 				</plugin>
 				<plugin>

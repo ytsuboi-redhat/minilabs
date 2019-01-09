@@ -17,11 +17,13 @@ services:
      - "8080:8080"
     depends_on: 
      - todo-mysql
-    entrypoint: ./wait-for-it.sh todo-mysql:3306 -- java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app.jar
-  # todo-frontend:
-  #   build: "./todo-frontend"
-  #   container_name: "todo-frontend"
-  #   ports:
-  #    - "80:80"
-  #   depends_on: 
-  #    - todo-backend
+    entrypoint: ./wait-for-it.sh todo-mysql:3306 -- java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+  todo-frontend:
+    build: "./todo-frontend"
+    container_name: "todo-frontend"
+    ports:
+     - "80:80"
+    volumes:
+     - ./todo-frontend/dist:/usr/share/nginx/html/
+    depends_on: 
+     - todo-backend
